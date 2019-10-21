@@ -5,18 +5,19 @@ GPG_PUB_KEY_FILE=""
 FTP_SERVER=""
 FTP_USER=""
 FTP_PASSWORD=""
+IP_RANGE=""
 
 usage()
 {
     echo "Usage: $1 --ovpn-file OVPN_CONFIG_FILE\n
-    --gpg-pubkey GPG_PUB_KEY_FILE\n    --ftp-server FTP_SERVER\n    --ftp-user FTP_USER\n    --ftp-password FTP_PASSWORD ||\n    -h help"
+    --gpg-pubkey GPG_PUB_KEY_FILE\n    --ftp-server FTP_SERVER\n    --ftp-user FTP_USER\n    --ftp-password FTP_PASSWORD --ipnet-range IP_RANGE \n||\n    -h help"
     echo ""
 }
 
 
 debug_info()
 {
-   echo "[INFO] ----------------> $1"
+   echo "[INFO] ---------------------------> $1"
 }
 
 pid=$(ps -ef | grep "openvpn --config $conf_file" | awk '{ print $2 }')
@@ -26,7 +27,7 @@ ovpn_connect()
 {
   debug_info "connect to vpn..."
   openvpn --daemon $1 --config $OVPN_CONFIG_FILE
-  sleep 8
+  sleep 5
   debug_info "connection initialization $link"
 
 }
@@ -64,7 +65,6 @@ while [ "$1" != "" ]; do
     case $PARAM in
         -h | --help)
             usage
-
             ;;
         --ovpn-file)
             OVPN_CONFIG_FILE=$VALUE
@@ -80,6 +80,9 @@ while [ "$1" != "" ]; do
             ;;
         --ftp-password)
             FTP_PASSWORD=$VALUE
+            ;;
+        --ipnet-range)
+            IP_RANGE=$VALUE
             ;;
         *)
             echo "ERROR: unknown parameter \"$PARAM\""

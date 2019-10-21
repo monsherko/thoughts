@@ -27,7 +27,7 @@ stop() {
 }
 
 status() {
-    pgrep -fl "openvpn --config /vagrant/vpn/client-dept18-payment.ovpn" >/dev/null 2>&1
+    pgrep -fl "openvpn --config /vagrant/vpn/cl.ovpn" >/dev/null 2>&1
     RETVAL=$?
     if [ $RETVAL -eq 0 ]; then
         pid=$(ps -ef | grep "openvpn --config $conf_file" | awk '{ print $2 }')

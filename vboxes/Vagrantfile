@@ -1,0 +1,40 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "vmheadns" do |vmheadns|
+    vmheadns.vm.box = "ubuntu/bionic64"
+    vmheadns.vm.hostname = " vmheadns"
+    headns.vm.network: private_network, ip: "10.0.55.15"
+    virtualbox__intnet: "natrave"
+
+    vmheadns.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--cpus", 1]
+      v.customize ["modifyvm", :id, "--name", "vmheadns"]
+    end
+  end
+
+  config.vm.define "vmravelogs" do |vmravelogs|
+    vmravelogs.vm.box = "ubuntu/bionic64"
+    vmravelogs.vm.hostname = "vmravelogs"
+    vmravelogs.vm.network: private_network, ip: "10.0.55.10"
+    vmravelogs.disksize.size = '96GB'
+    virtualbox__intnet: "natrave"
+
+    vmravelogs.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--cpus", 2]
+      v.customize ["modifyvm", :id, "--name", "vmravelogs"]
+    end
+  end
+
+  config.vm.define "vmravegunner" do |vmravegunner|
+    vmravegunner.vm.box = "ubuntu/bionic64"
+    vmravegunner.vm.hostname = "vmravegunner"
+    vmravegunner.vm.network: private_network, ip: "10.0.55.15"
+    virtualbox__intnet: "natrave"
+
+    vmravegunner.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--cpus", 1]
+      v.customize ["modifyvm", :id, "--name", "vmgunner"]
+    end
+  end
