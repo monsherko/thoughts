@@ -11,6 +11,11 @@ usage()
 }
 
 
+debug_info()
+{
+   echo "[INFO] ----------------> $1"
+}
+
 
 while getopts "f:" opt
 do
@@ -27,9 +32,10 @@ then
    usage
 fi
 
-
+debug_info "starting..."
 
 while read line
 do
   nmap  --dns-servers ns1.asuscomm.com -iL $FILE_PATH -sV --top-ports 1000  -T2 -O -v -v -v -Pn --script auth,version,banners  -oX _"$line"_.xml
 done < "$FILE_PATH"
+debug_info "finish"

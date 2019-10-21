@@ -12,6 +12,11 @@ usage()
    exit 1 # Exit script after printing help
 }
 
+debug_info()
+{
+   echo "[INFO] ----------------> $1"
+}
+
 
 while getopts "f:" opt
 do
@@ -28,5 +33,6 @@ then
    usage
 fi
 
-
+debug_info "starting..."
 nmap  "$IP"/"$NUM_RANGE" -sP |  grep -oE "\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"   >  $FILE_PATH
+debug_info "finish"
