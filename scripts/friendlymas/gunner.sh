@@ -26,6 +26,7 @@ debug_info "staring scanning"
 while read line
 do
   masscan -iL FILE_PATH  -p0-65535  -oJ _"$i"_.json --banners  --source-port 61000 --shards "$i"/$LINES
+  i=$((i+1))
   debug_info "file _$line was created"
 done < "$FILE_PATH"
 debug_info "finisn"
