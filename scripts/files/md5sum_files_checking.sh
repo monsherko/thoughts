@@ -12,7 +12,9 @@ CONTAINERS=(
 rand_dir_name=$(mktemp -d "${TMPDIR:-/tmp}"/tmp.XXXXXXXX)
 
 function packages_verify_install() {
+
   mkdir ${rand_dir_name}
+
   find ${1}  -type f -print0 | while read -r -d '' f;  do
     for i in "${PACKAGES[@]}"; do
       if [[ $(md5sum ${f}) == "${i%%:*}"* ]]; then

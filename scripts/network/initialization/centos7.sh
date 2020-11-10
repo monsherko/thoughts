@@ -125,4 +125,3 @@ echo  "NAME=${INTERFACE}" >> /etc/sysconfig/network-scripts/ifcfg-${INTERFACE}
 
 
 #ip addr add ${IPADDR}${PREFIX} dev ${INTERFACE}
-
